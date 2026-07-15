@@ -1,0 +1,2025 @@
+[
+  {
+    "description": "  Verify that a valid user can log in and the UI is displayed in German.",
+    "elements": [
+      {
+        "description": "",
+        "id": "login;successful-login-redirects-to-the-home-dashboard",
+        "keyword": "Scenario",
+        "line": 7,
+        "name": "Successful login redirects to the home dashboard",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 159468811
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 5,
+            "name": "the standard IFMS test data exists",
+            "match": {
+              "location": "steps/seed.steps.ts:5"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 6883913219
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 8,
+            "name": "I open the Odoo login page",
+            "match": {
+              "location": "steps/login.steps.ts:7"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1207857952
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 9,
+            "name": "I log in as a \"Bereichsleiter\"",
+            "match": {
+              "location": "steps/login.steps.ts:20"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 11366021775
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 10,
+            "name": "I am on the home dashboard",
+            "match": {
+              "location": "steps/login.steps.ts:40"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 29678101
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 11,
+            "name": "the interface is in German",
+            "match": {
+              "location": "steps/login.steps.ts:45"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 6552343
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 33733368
+            }
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      }
+    ],
+    "id": "login",
+    "line": 1,
+    "keyword": "Feature",
+    "name": "Login",
+    "tags": [],
+    "uri": "features/login/login.feature"
+  },
+  {
+    "description": "  Show the contracted hours (Zugewiesene Zeit / Kontrollstunden) next to the\n  planned hours on each project row in the Planning Gantt, so planners can\n  see at a glance whether an Objekt is under- or over-staffed against its\n  contract, without breaking the existing Gantt visuals.\n  Requires: fixture property \"Testobjekt Kontrollstunden BDD\" linked to customer \"IFMS GmbH\".",
+    "elements": [
+      {
+        "description": "",
+        "id": "planning-gantt-—-contracted-vs.-planned-hours-indicator-(kontrollstunden);contracted-vs-planned-indicator-appears-on-project-rows-without-disturbing-existing-row-controls",
+        "keyword": "Scenario",
+        "line": 16,
+        "name": "Contracted-vs-planned indicator appears on project rows without disturbing existing row controls",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 101859899
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 9,
+            "name": "the standard IFMS test data exists",
+            "match": {
+              "location": "steps/seed.steps.ts:5"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 374587
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 10,
+            "name": "I am logged in as \"admin\" with password \"admin\"",
+            "match": {
+              "location": "steps/login.steps.ts:26"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 2756124622
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 11,
+            "name": "a property \"Testobjekt Kontrollstunden BDD\" exists for customer \"IFMS GmbH\"",
+            "match": {
+              "location": "steps/sale_order.steps.ts:6"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 325649841
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 12,
+            "name": "a project \"Objekt Kontrollstunden BDD\" exists for customer \"IFMS GmbH\" and property \"Testobjekt Kontrollstunden BDD\" managed by \"Bereichsleiter\" with Monday control hours of 8 hours",
+            "match": {
+              "location": "steps/planning.steps.ts:21"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 446461897
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 13,
+            "name": "I am logged in as a \"Bereichsleiter\"",
+            "match": {
+              "location": "steps/login.steps.ts:34"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1416831683
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 17,
+            "name": "I navigate to the Planning Gantt grouped by project",
+            "match": {
+              "location": "steps/planning.steps.ts:125"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1930743297
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 18,
+            "name": "I switch the Gantt to week scale",
+            "match": {
+              "location": "steps/planning.steps.ts:138"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1640074915
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 19,
+            "name": "the project row for \"Objekt Kontrollstunden BDD\" shows a contracted-hours indicator",
+            "match": {
+              "location": "steps/planning.steps.ts:148"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 5460531
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 20,
+            "name": "the add-open-shifts button is still visible on the project row for \"Objekt Kontrollstunden BDD\"",
+            "match": {
+              "location": "steps/planning.steps.ts:184"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 3488424
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 31021290
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@task-188",
+            "line": 15
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "planning-gantt-—-contracted-vs.-planned-hours-indicator-(kontrollstunden);weekend-and-holiday-column-tinting-is-unaffected-by-the-new-indicator",
+        "keyword": "Scenario",
+        "line": 23,
+        "name": "Weekend and holiday column tinting is unaffected by the new indicator",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 94001608
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 9,
+            "name": "the standard IFMS test data exists",
+            "match": {
+              "location": "steps/seed.steps.ts:5"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 136888
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 10,
+            "name": "I am logged in as \"admin\" with password \"admin\"",
+            "match": {
+              "location": "steps/login.steps.ts:26"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1915403931
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 11,
+            "name": "a property \"Testobjekt Kontrollstunden BDD\" exists for customer \"IFMS GmbH\"",
+            "match": {
+              "location": "steps/sale_order.steps.ts:6"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 83007071
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 12,
+            "name": "a project \"Objekt Kontrollstunden BDD\" exists for customer \"IFMS GmbH\" and property \"Testobjekt Kontrollstunden BDD\" managed by \"Bereichsleiter\" with Monday control hours of 8 hours",
+            "match": {
+              "location": "steps/planning.steps.ts:21"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 243972825
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 13,
+            "name": "I am logged in as a \"Bereichsleiter\"",
+            "match": {
+              "location": "steps/login.steps.ts:34"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1431643878
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 24,
+            "name": "I navigate to the Planning Gantt grouped by project",
+            "match": {
+              "location": "steps/planning.steps.ts:125"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1181808038
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 25,
+            "name": "I switch the Gantt to month scale",
+            "match": {
+              "location": "steps/planning.steps.ts:143"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1642573975
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 26,
+            "name": "weekend or holiday columns are still tinted in the Gantt",
+            "match": {
+              "location": "steps/planning.steps.ts:189"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 4344989
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 35560818
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@task-188",
+            "line": 22
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "planning-gantt-—-contracted-vs.-planned-hours-indicator-(kontrollstunden);editing-a-project's-control-hours-updates-the-gantt-indicator-on-reload",
+        "keyword": "Scenario",
+        "line": 29,
+        "name": "Editing a project's control hours updates the Gantt indicator on reload",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 87930421
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 9,
+            "name": "the standard IFMS test data exists",
+            "match": {
+              "location": "steps/seed.steps.ts:5"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 128557
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 10,
+            "name": "I am logged in as \"admin\" with password \"admin\"",
+            "match": {
+              "location": "steps/login.steps.ts:26"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1873159413
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 11,
+            "name": "a property \"Testobjekt Kontrollstunden BDD\" exists for customer \"IFMS GmbH\"",
+            "match": {
+              "location": "steps/sale_order.steps.ts:6"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 85129576
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 12,
+            "name": "a project \"Objekt Kontrollstunden BDD\" exists for customer \"IFMS GmbH\" and property \"Testobjekt Kontrollstunden BDD\" managed by \"Bereichsleiter\" with Monday control hours of 8 hours",
+            "match": {
+              "location": "steps/planning.steps.ts:21"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 176280572
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 13,
+            "name": "I am logged in as a \"Bereichsleiter\"",
+            "match": {
+              "location": "steps/login.steps.ts:34"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1352452767
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 30,
+            "name": "I navigate to the Planning Gantt grouped by project",
+            "match": {
+              "location": "steps/planning.steps.ts:125"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1162711101
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 31,
+            "name": "I switch the Gantt to month scale",
+            "match": {
+              "location": "steps/planning.steps.ts:143"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1631249405
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 32,
+            "name": "the project row for \"Objekt Kontrollstunden BDD\" shows a contracted-hours indicator for Monday hours of 8",
+            "match": {
+              "location": "steps/planning.steps.ts:172"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 6409918
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 33,
+            "name": "the Monday control hours for project \"Objekt Kontrollstunden BDD\" are changed to 16 hours",
+            "match": {
+              "location": "steps/planning.steps.ts:102"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 72679932
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 34,
+            "name": "I reload the Planning Gantt",
+            "match": {
+              "location": "steps/planning.steps.ts:131"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1033144648
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 35,
+            "name": "I switch the Gantt to month scale",
+            "match": {
+              "location": "steps/planning.steps.ts:143"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1638070671
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 36,
+            "name": "the project row for \"Objekt Kontrollstunden BDD\" shows a contracted-hours indicator for Monday hours of 16",
+            "match": {
+              "location": "steps/planning.steps.ts:172"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 4394164
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 30273193
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@task-188",
+            "line": 28
+          }
+        ],
+        "type": "scenario"
+      }
+    ],
+    "id": "planning-gantt-—-contracted-vs.-planned-hours-indicator-(kontrollstunden)",
+    "line": 1,
+    "keyword": "Feature",
+    "name": "Planning Gantt — contracted vs. planned hours indicator (Kontrollstunden)",
+    "tags": [],
+    "uri": "features/planning/gantt_control_hours_indicator.feature"
+  },
+  {
+    "description": "  Covers the \"Add Open Shifts\" bulk action, the holiday-shift display regression,\n  and the alternating row-color feature, none of which have BDD coverage today.\n  Requires: fixture property \"Testobjekt Schichten BDD\" linked to customer \"IFMS GmbH\".",
+    "elements": [
+      {
+        "description": "",
+        "id": "planning-gantt-—-bulk-open-shifts,-holiday-shift-display,-row-coloring;bulk-\"add-open-shifts\"-creates-the-requested-number-of-open-shift-chips",
+        "keyword": "Scenario",
+        "line": 14,
+        "name": "Bulk \"Add Open Shifts\" creates the requested number of open shift chips",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 156476492
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 7,
+            "name": "the standard IFMS test data exists",
+            "match": {
+              "location": "steps/seed.steps.ts:5"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 158061
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 8,
+            "name": "I am logged in as \"admin\" with password \"admin\"",
+            "match": {
+              "location": "steps/login.steps.ts:26"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1897802870
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 9,
+            "name": "a property \"Testobjekt Schichten BDD\" exists for customer \"IFMS GmbH\"",
+            "match": {
+              "location": "steps/sale_order.steps.ts:6"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 137854264
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 10,
+            "name": "a project \"Objekt Schichten BDD\" exists for customer \"IFMS GmbH\" and property \"Testobjekt Schichten BDD\" managed by \"Bereichsleiter\" with Monday control hours of 8 hours",
+            "match": {
+              "location": "steps/planning.steps.ts:21"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 298241718
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 11,
+            "name": "I am logged in as a \"Bereichsleiter\"",
+            "match": {
+              "location": "steps/login.steps.ts:34"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1402807872
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 15,
+            "name": "I navigate to the Planning Gantt grouped by project",
+            "match": {
+              "location": "steps/planning.steps.ts:125"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1155141380
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 16,
+            "name": "I switch the Gantt to week scale",
+            "match": {
+              "location": "steps/planning.steps.ts:138"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1648209891
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 17,
+            "name": "I add 2 open shifts to the project row for \"Objekt Schichten BDD\"",
+            "match": {
+              "location": "steps/planning.steps.ts:195"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1285458290
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 18,
+            "name": "the project row for \"Objekt Schichten BDD\" gains 2 more open shift chips",
+            "match": {
+              "location": "steps/planning.steps.ts:206"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 3405271
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 32633058
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@task-63",
+            "line": 13
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "planning-gantt-—-bulk-open-shifts,-holiday-shift-display,-row-coloring;gantt-shift-chips-alternate-row-background-colors",
+        "keyword": "Scenario",
+        "line": 21,
+        "name": "Gantt shift chips alternate row background colors",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 87310543
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 7,
+            "name": "the standard IFMS test data exists",
+            "match": {
+              "location": "steps/seed.steps.ts:5"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 131148
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 8,
+            "name": "I am logged in as \"admin\" with password \"admin\"",
+            "match": {
+              "location": "steps/login.steps.ts:26"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1971434924
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 9,
+            "name": "a property \"Testobjekt Schichten BDD\" exists for customer \"IFMS GmbH\"",
+            "match": {
+              "location": "steps/sale_order.steps.ts:6"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 83487558
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 10,
+            "name": "a project \"Objekt Schichten BDD\" exists for customer \"IFMS GmbH\" and property \"Testobjekt Schichten BDD\" managed by \"Bereichsleiter\" with Monday control hours of 8 hours",
+            "match": {
+              "location": "steps/planning.steps.ts:21"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 167174359
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 11,
+            "name": "I am logged in as a \"Bereichsleiter\"",
+            "match": {
+              "location": "steps/login.steps.ts:34"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1327984836
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 22,
+            "name": "I navigate to the Planning Gantt grouped by project",
+            "match": {
+              "location": "steps/planning.steps.ts:125"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1147138005
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 23,
+            "name": "I switch the Gantt to week scale",
+            "match": {
+              "location": "steps/planning.steps.ts:138"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1643490223
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 24,
+            "name": "I add 2 open shifts to the project row for \"Objekt Schichten BDD\"",
+            "match": {
+              "location": "steps/planning.steps.ts:195"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1289138639
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 25,
+            "name": "consecutive shift chips in the project row for \"Objekt Schichten BDD\" alternate between two background colors",
+            "match": {
+              "location": "steps/planning.steps.ts:214"
+            },
+            "result": {
+              "status": "failed",
+              "duration": 40174047,
+              "error_message": "Error: expect(received).not.toBe(expected) // Object.is equality\n\nExpected: not \"rgb(149, 175, 202)\"\n    at Proxy.<anonymous> (/export/odoo/gh-action-runner/_work/Ifms-odoo-playwright/Ifms-odoo-playwright/playwright/node_modules/playwright/lib/matchers/expect.js:213:24)\n    at OdooWorld.<anonymous> (/export/odoo/gh-action-runner/_work/Ifms-odoo-playwright/Ifms-odoo-playwright/playwright/steps/planning.steps.ts:219:27)"
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 2095448595
+            },
+            "embeddings": [
+              {
+                "data": "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",
+                "mime_type": "image/png"
+              }
+            ]
+          }
+        ],
+        "tags": [
+          {
+            "name": "@task-214",
+            "line": 20
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "planning-gantt-—-bulk-open-shifts,-holiday-shift-display,-row-coloring;a-shift-on-a-public-holiday-still-shows-the-assigned-employee,-not-an-\"away\"-placeholder",
+        "keyword": "Scenario",
+        "line": 28,
+        "name": "A shift on a public holiday still shows the assigned employee, not an \"away\" placeholder",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 77649353
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 7,
+            "name": "the standard IFMS test data exists",
+            "match": {
+              "location": "steps/seed.steps.ts:5"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 144521
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 8,
+            "name": "I am logged in as \"admin\" with password \"admin\"",
+            "match": {
+              "location": "steps/login.steps.ts:26"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1851657612
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 9,
+            "name": "a property \"Testobjekt Schichten BDD\" exists for customer \"IFMS GmbH\"",
+            "match": {
+              "location": "steps/sale_order.steps.ts:6"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 85958312
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 10,
+            "name": "a project \"Objekt Schichten BDD\" exists for customer \"IFMS GmbH\" and property \"Testobjekt Schichten BDD\" managed by \"Bereichsleiter\" with Monday control hours of 8 hours",
+            "match": {
+              "location": "steps/planning.steps.ts:21"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 155671789
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 11,
+            "name": "I am logged in as a \"Bereichsleiter\"",
+            "match": {
+              "location": "steps/login.steps.ts:34"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1314500654
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 29,
+            "name": "an open shift on \"Objekt Schichten BDD\" is assigned to \"Szandra Ugljesic\" for the next upcoming Austrian public holiday",
+            "match": {
+              "location": "steps/planning.steps.ts:223"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 86590956
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 30,
+            "name": "I navigate to the Planning Gantt grouped by project",
+            "match": {
+              "location": "steps/planning.steps.ts:125"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1139098824
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 31,
+            "name": "I switch the Gantt to month scale",
+            "match": {
+              "location": "steps/planning.steps.ts:143"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1640760129
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 32,
+            "name": "I navigate the Gantt forward to the holiday's month",
+            "match": {
+              "location": "steps/planning.steps.ts:276"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 520447526
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 33,
+            "name": "the shift pill for \"Szandra Ugljesic\" is visible on the holiday date",
+            "match": {
+              "location": "steps/planning.steps.ts:290"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 135110166
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 34,
+            "name": "the shift pill does not show \"abwesend\"",
+            "match": {
+              "location": "steps/planning.steps.ts:297"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 8263632
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 32141847
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@task-151",
+            "line": 27
+          }
+        ],
+        "type": "scenario"
+      }
+    ],
+    "id": "planning-gantt-—-bulk-open-shifts,-holiday-shift-display,-row-coloring",
+    "line": 1,
+    "keyword": "Feature",
+    "name": "Planning Gantt — bulk open shifts, holiday shift display, row coloring",
+    "tags": [],
+    "uri": "features/planning/open_shifts.feature"
+  },
+  {
+    "description": "  Core sale order scenarios for the IFMS customized quotation flow.\n  Requires: fixture property \"Testobjekt Wien\" linked to IFMS GmbH (created via \"the standard IFMS test data exists\").",
+    "elements": [
+      {
+        "description": "",
+        "id": "quotation-workflow;create-a-quotation-and-verify-category-based-offer-number",
+        "keyword": "Scenario",
+        "line": 11,
+        "name": "Create a quotation and verify category-based offer number",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 83725260
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 6,
+            "name": "the standard IFMS test data exists",
+            "match": {
+              "location": "steps/seed.steps.ts:5"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 162189
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 7,
+            "name": "I am logged in as \"admin\" with password \"admin\"",
+            "match": {
+              "location": "steps/login.steps.ts:26"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1838357877
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 8,
+            "name": "a property \"Testobjekt Wien\" exists for customer \"IFMS GmbH\"",
+            "match": {
+              "location": "steps/sale_order.steps.ts:6"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 132824578
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 9,
+            "name": "I am logged in as a \"Niederlassungsleiter\"",
+            "match": {
+              "location": "steps/login.steps.ts:34"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1386453069
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 12,
+            "name": "I navigate to Quotations",
+            "match": {
+              "location": "steps/sale_order.steps.ts:84"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 218760015
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 13,
+            "name": "I create a new quotation",
+            "match": {
+              "location": "steps/sale_order.steps.ts:89"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1701505390
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 14,
+            "name": "I set the customer to \"IFMS GmbH\"",
+            "match": {
+              "location": "steps/sale_order.steps.ts:94"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1391898497
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 15,
+            "name": "I set the property to \"Testobjekt Wien\"",
+            "match": {
+              "location": "steps/sale_order.steps.ts:99"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1353654347
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 16,
+            "name": "I set the category to \"IFMS Leistungen / Hausreinigung\"",
+            "match": {
+              "location": "steps/sale_order.steps.ts:104"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1352312755
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 17,
+            "name": "I set the branch to \"Niederlassung Wien\"",
+            "match": {
+              "location": "steps/sale_order.steps.ts:109"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1356389811
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 18,
+            "name": "I set the signature employees to \"Administrator\" and \"Test Unterzeichner\"",
+            "match": {
+              "location": "steps/sale_order.steps.ts:119"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 2623793603
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 19,
+            "name": "I confirm the quotation",
+            "match": {
+              "location": "steps/sale_order.steps.ts:124"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 219468691
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 20,
+            "name": "a 6-digit offer number is assigned",
+            "match": {
+              "location": "steps/sale_order.steps.ts:129"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 5148073
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 21,
+            "name": "the category field is locked",
+            "match": {
+              "location": "steps/sale_order.steps.ts:135"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 24250495
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 40462711
+            }
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "quotation-workflow;confirm-a-quotation-changes-status-to-auftrag",
+        "keyword": "Scenario",
+        "line": 23,
+        "name": "Confirm a quotation changes status to Auftrag",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 87447024
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 6,
+            "name": "the standard IFMS test data exists",
+            "match": {
+              "location": "steps/seed.steps.ts:5"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 144205
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 7,
+            "name": "I am logged in as \"admin\" with password \"admin\"",
+            "match": {
+              "location": "steps/login.steps.ts:26"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1831120813
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 8,
+            "name": "a property \"Testobjekt Wien\" exists for customer \"IFMS GmbH\"",
+            "match": {
+              "location": "steps/sale_order.steps.ts:6"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 106018769
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 9,
+            "name": "I am logged in as a \"Niederlassungsleiter\"",
+            "match": {
+              "location": "steps/login.steps.ts:34"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1267856060
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 24,
+            "name": "I navigate to Quotations",
+            "match": {
+              "location": "steps/sale_order.steps.ts:84"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 217571897
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 25,
+            "name": "I create a new quotation",
+            "match": {
+              "location": "steps/sale_order.steps.ts:89"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1698302353
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 26,
+            "name": "I set the customer to \"IFMS GmbH\"",
+            "match": {
+              "location": "steps/sale_order.steps.ts:94"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1360412674
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 27,
+            "name": "I set the property to \"Testobjekt Wien\"",
+            "match": {
+              "location": "steps/sale_order.steps.ts:99"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1350031363
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 28,
+            "name": "I set the category to \"IFMS Leistungen / Hausreinigung\"",
+            "match": {
+              "location": "steps/sale_order.steps.ts:104"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1338227484
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 29,
+            "name": "I set the branch to \"Niederlassung Wien\"",
+            "match": {
+              "location": "steps/sale_order.steps.ts:109"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1341156722
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 30,
+            "name": "I set the signature employees to \"Administrator\" and \"Test Unterzeichner\"",
+            "match": {
+              "location": "steps/sale_order.steps.ts:119"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 2650797718
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 31,
+            "name": "I confirm the quotation",
+            "match": {
+              "location": "steps/sale_order.steps.ts:124"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 202139088
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 32,
+            "name": "the order status is \"Verkaufsauftrag\"",
+            "match": {
+              "location": "steps/sale_order.steps.ts:140"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 368866552
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 37998331
+            }
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "quotation-workflow;payment-terms-auto-fill-from-the-customer's-default-term",
+        "keyword": "Scenario",
+        "line": 35,
+        "name": "Payment terms auto-fill from the customer's default term",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 97328721
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 6,
+            "name": "the standard IFMS test data exists",
+            "match": {
+              "location": "steps/seed.steps.ts:5"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 166414
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 7,
+            "name": "I am logged in as \"admin\" with password \"admin\"",
+            "match": {
+              "location": "steps/login.steps.ts:26"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1933889384
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 8,
+            "name": "a property \"Testobjekt Wien\" exists for customer \"IFMS GmbH\"",
+            "match": {
+              "location": "steps/sale_order.steps.ts:6"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 83524403
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 9,
+            "name": "I am logged in as a \"Niederlassungsleiter\"",
+            "match": {
+              "location": "steps/login.steps.ts:34"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1293190331
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 36,
+            "name": "I navigate to Quotations",
+            "match": {
+              "location": "steps/sale_order.steps.ts:84"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 222921086
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 37,
+            "name": "I create a new quotation",
+            "match": {
+              "location": "steps/sale_order.steps.ts:89"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1700803964
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 38,
+            "name": "I set the customer to \"IFMS GmbH\"",
+            "match": {
+              "location": "steps/sale_order.steps.ts:94"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1361102702
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 39,
+            "name": "the payment terms field auto-fills from the customer's default",
+            "match": {
+              "location": "steps/sale_order.steps.ts:156"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 22704438
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 48921023
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@task-135",
+            "line": 34
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "quotation-workflow;confirming-a-quotation-without-both-signature-employees-is-blocked",
+        "keyword": "Scenario",
+        "line": 42,
+        "name": "Confirming a quotation without both signature employees is blocked",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 85007704
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 6,
+            "name": "the standard IFMS test data exists",
+            "match": {
+              "location": "steps/seed.steps.ts:5"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 135668
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 7,
+            "name": "I am logged in as \"admin\" with password \"admin\"",
+            "match": {
+              "location": "steps/login.steps.ts:26"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1819327485
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 8,
+            "name": "a property \"Testobjekt Wien\" exists for customer \"IFMS GmbH\"",
+            "match": {
+              "location": "steps/sale_order.steps.ts:6"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 79438741
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 9,
+            "name": "I am logged in as a \"Niederlassungsleiter\"",
+            "match": {
+              "location": "steps/login.steps.ts:34"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1328473979
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 43,
+            "name": "I navigate to Quotations",
+            "match": {
+              "location": "steps/sale_order.steps.ts:84"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 226529718
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 44,
+            "name": "I create a new quotation",
+            "match": {
+              "location": "steps/sale_order.steps.ts:89"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1699001797
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 45,
+            "name": "I set the customer to \"IFMS GmbH\"",
+            "match": {
+              "location": "steps/sale_order.steps.ts:94"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1372250255
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 46,
+            "name": "I set the property to \"Testobjekt Wien\"",
+            "match": {
+              "location": "steps/sale_order.steps.ts:99"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1362718548
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 47,
+            "name": "I set the category to \"IFMS Leistungen / Hausreinigung\"",
+            "match": {
+              "location": "steps/sale_order.steps.ts:104"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1335636819
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 48,
+            "name": "I set the branch to \"Niederlassung Wien\"",
+            "match": {
+              "location": "steps/sale_order.steps.ts:109"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1345502875
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 49,
+            "name": "I set the signature employees to \"Administrator\" and \"Test Unterzeichner\"",
+            "match": {
+              "location": "steps/sale_order.steps.ts:119"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 2641471862
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 50,
+            "name": "I clear the second signature employee",
+            "match": {
+              "location": "steps/sale_order.steps.ts:146"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 99005170
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 51,
+            "name": "I attempt to confirm the quotation",
+            "match": {
+              "location": "steps/sale_order.steps.ts:151"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 54242738
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 52,
+            "name": "the second signature employee field is marked invalid",
+            "match": {
+              "location": "steps/sale_order.steps.ts:171"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 44049913
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 53,
+            "name": "the order status is \"Angebot\"",
+            "match": {
+              "location": "steps/sale_order.steps.ts:140"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 4985942
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 40270810
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@task-134",
+            "line": 41
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "quotation-workflow;an-\"allgemein\"-category-quotation-cannot-be-confirmed",
+        "keyword": "Scenario",
+        "line": 56,
+        "name": "An \"Allgemein\" category quotation cannot be confirmed",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 106849879
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 6,
+            "name": "the standard IFMS test data exists",
+            "match": {
+              "location": "steps/seed.steps.ts:5"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 152834
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 7,
+            "name": "I am logged in as \"admin\" with password \"admin\"",
+            "match": {
+              "location": "steps/login.steps.ts:26"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1849194906
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 8,
+            "name": "a property \"Testobjekt Wien\" exists for customer \"IFMS GmbH\"",
+            "match": {
+              "location": "steps/sale_order.steps.ts:6"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 78676138
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 9,
+            "name": "I am logged in as a \"Niederlassungsleiter\"",
+            "match": {
+              "location": "steps/login.steps.ts:34"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1235714699
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 57,
+            "name": "I navigate to Quotations",
+            "match": {
+              "location": "steps/sale_order.steps.ts:84"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 206995588
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 58,
+            "name": "I create a new quotation",
+            "match": {
+              "location": "steps/sale_order.steps.ts:89"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1682274166
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 59,
+            "name": "I set the customer to \"IFMS GmbH\"",
+            "match": {
+              "location": "steps/sale_order.steps.ts:94"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1361109465
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 60,
+            "name": "I set the property to \"Testobjekt Wien\"",
+            "match": {
+              "location": "steps/sale_order.steps.ts:99"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1340225170
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 61,
+            "name": "I set the category to \"Allgemein\"",
+            "match": {
+              "location": "steps/sale_order.steps.ts:104"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1341769625
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 62,
+            "name": "the confirm button is hidden",
+            "match": {
+              "location": "steps/sale_order.steps.ts:181"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 6836822
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 37329893
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@task-28",
+            "line": 55
+          },
+          {
+            "name": "@task-77",
+            "line": 55
+          }
+        ],
+        "type": "scenario"
+      }
+    ],
+    "id": "quotation-workflow",
+    "line": 1,
+    "keyword": "Feature",
+    "name": "Quotation workflow",
+    "tags": [],
+    "uri": "features/sale_order/quotation_workflow.feature"
+  }
+]
