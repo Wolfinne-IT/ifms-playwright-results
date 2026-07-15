@@ -1,10 +1,74 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-<head><meta charset="utf-8"><title>IFMS E2E BDD Test Reports</title>
-<style>body{font-family:system-ui,sans-serif;margin:2rem;background:#f8f9fa;color:#212529}</style>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IFMS E2E BDD Test Reports</title>
+<style>
+  html, body { height: 100%; margin: 0; }
+  body {
+    display: flex; align-items: center; justify-content: center;
+    font-family: system-ui, sans-serif;
+    background: #212529; color: #f8f9fa;
+  }
+  .box {
+    background: #343a40; border-radius: 8px; padding: 2rem 2.5rem;
+    box-shadow: 0 4px 16px rgba(0,0,0,.4); text-align: center; min-width: 280px;
+  }
+  h1 { font-size: 1.1rem; font-weight: 600; margin: 0 0 1.25rem; }
+  input {
+    width: 100%; box-sizing: border-box; padding: .6rem .75rem; margin-bottom: .75rem;
+    border-radius: 4px; border: 1px solid #495057; background: #212529; color: #f8f9fa;
+    text-align: center; font-size: 1rem;
+  }
+  button {
+    width: 100%; padding: .6rem; border: none; border-radius: 4px;
+    background: #0d6efd; color: #fff; font-size: 1rem; cursor: pointer;
+  }
+  button:hover { background: #0b5ed7; }
+  #status { min-height: 1.2rem; margin-top: .6rem; font-size: .85rem; color: #ff6b6b; }
+</style>
 </head>
 <body>
-<h1>IFMS E2E BDD Test Reports</h1>
-<p>No test runs published yet. This page is regenerated automatically by the <a href="https://github.com/Wolfinne-IT/Ifms-odoo-playwright/actions/workflows/e2e-ci.yml">E2E Tests workflow</a> in ifms-playwright.</p>
+  <div class="box">
+    <h1>IFMS E2E BDD Test Reports</h1>
+    <input id="password" type="password" placeholder="Password" autofocus>
+    <button id="enter">Enter</button>
+    <div id="status"></div>
+  </div>
+
+<script>
+"use strict";
+
+async function sha1Hex(text) {
+  const data = new TextEncoder().encode(text);
+  const digest = await crypto.subtle.digest("SHA-1", data);
+  return Array.from(new Uint8Array(digest)).map((b) => b.toString(16).padStart(2, "0")).join("");
+}
+
+async function tryEnter() {
+  const pwd = document.getElementById("password").value;
+  const status = document.getElementById("status");
+  if (!pwd) return;
+  const hash = await sha1Hex(pwd);
+  const url = hash + "/index.html";
+  try {
+    const res = await fetch(url, { method: "HEAD" });
+    if (res.ok) {
+      window.location = url;
+      return;
+    }
+  } catch (e) {
+    // fall through to error state below
+  }
+  status.textContent = "Wrong password";
+  document.getElementById("password").value = "";
+}
+
+document.getElementById("enter").addEventListener("click", tryEnter);
+document.getElementById("password").addEventListener("keypress", (e) => {
+  if (e.key === "Enter") tryEnter();
+});
+</script>
 </body>
 </html>
