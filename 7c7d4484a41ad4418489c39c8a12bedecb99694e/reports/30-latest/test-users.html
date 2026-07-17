@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>IFMS BDD Test Users</title>
+<style>
+  body { font-family: system-ui, sans-serif; margin: 2rem; background: #f8f9fa; color: #212529; }
+  h1 { font-size: 1.4rem; }
+  .back { display: inline-block; margin-bottom: 1rem; }
+  .warning {
+    max-width: 900px; margin-bottom: 1.25rem; padding: .75rem 1rem;
+    background: #fff3cd; border: 1px solid #ffe69c; border-radius: .25rem; color: #664d03;
+  }
+  table { border-collapse: collapse; width: 100%; max-width: 900px; background: #fff; box-shadow: 0 1px 3px rgba(0,0,0,.1); }
+  th, td { text-align: left; padding: .5rem .75rem; border-bottom: 1px solid #e9ecef; }
+  th { background: #f1f3f5; }
+  code { background: #f1f3f5; padding: .1rem .35rem; border-radius: .2rem; }
+  a { color: #0d6efd; text-decoration: none; }
+  a:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+<a class="back" href="index.html">&larr; Back to test report</a>
+<h1>IFMS BDD Test Users</h1>
+<div class="warning">
+  Local/CI fixture accounts only — seeded into the ephemeral <code>odoo_test</code> database by
+  <code>ensureSeedData()</code> for this run. Not valid on staging or production.
+</div>
+<table>
+<thead><tr><th>Employee</th><th>Login</th><th>Password</th><th>Role</th><th>Role Group</th></tr></thead>
+<tbody>
+<tr>
+  <td>Szandra Ugljesic</td>
+  <td><code>bereichsleiter.bdd@wolfinne.test</code></td>
+  <td><code>BddTest1234!</code></td>
+  <td>Bereichsleiter</td>
+  <td>Bereichsleitung</td>
+</tr>
+<tr>
+  <td>Jovica Tomic</td>
+  <td><code>niederlassungsleiter.bdd@wolfinne.test</code></td>
+  <td><code>BddTest1234!</code></td>
+  <td>Niederlassungsleiter</td>
+  <td>Niederlassungsleitung</td>
+</tr>
+<tr>
+  <td>Jürgen Bürger</td>
+  <td><code>bereichsleitungbewachung.bdd@wolfinne.test</code></td>
+  <td><code>BddTest1234!</code></td>
+  <td>Bereichsleitung Bewachung</td>
+  <td>Bereichsleitung Bewachung</td>
+</tr>
+<tr>
+  <td>Klaus Fellner</td>
+  <td><code>geschaeftsfuehrung.bdd@wolfinne.test</code></td>
+  <td><code>BddTest1234!</code></td>
+  <td>Geschäftsführung</td>
+  <td>Geschäftsführung</td>
+</tr>
+<tr>
+  <td>Petra Winkler</td>
+  <td><code>buchhaltung.bdd@wolfinne.test</code></td>
+  <td><code>BddTest1234!</code></td>
+  <td>Buchhaltung / Controlling</td>
+  <td>Buchhaltung / Controlling</td>
+</tr>
+<tr>
+  <td>Sabine Gruber</td>
+  <td><code>faktura.bdd@wolfinne.test</code></td>
+  <td><code>BddTest1234!</code></td>
+  <td>Faktura / Rechnungswesen</td>
+  <td>Faktura / Rechnungswesen</td>
+</tr>
+<tr>
+  <td>Andrea Steiner</td>
+  <td><code>sachbearbeitung.bdd@wolfinne.test</code></td>
+  <td><code>BddTest1234!</code></td>
+  <td>Sachbearbeitung / Verwaltung</td>
+  <td>Sachbearbeitung / Verwaltung</td>
+</tr>
+<tr>
+  <td>Thomas Wagner</td>
+  <td><code>kalkulation.bdd@wolfinne.test</code></td>
+  <td><code>BddTest1234!</code></td>
+  <td>Kalkulation / Vertrieb</td>
+  <td>Kalkulation / Vertrieb</td>
+</tr>
+<tr>
+  <td>Nicole Brunner</td>
+  <td><code>personalwesen.bdd@wolfinne.test</code></td>
+  <td><code>BddTest1234!</code></td>
+  <td>Personalwesen</td>
+  <td>Personalwesen</td>
+</tr>
+<tr>
+  <td>Peter Huber</td>
+  <td><code>vorarbeiter.bdd@wolfinne.test</code></td>
+  <td><code>BddTest1234!</code></td>
+  <td>Vorarbeiter / KWP-Leitung</td>
+  <td>Vorarbeiter / KWP-Leitung</td>
+</tr>
+<tr>
+  <td>Ivana Kovac</td>
+  <td><code>aussendienst-reinigung.bdd@wolfinne.test</code></td>
+  <td><code>BddTest1234!</code></td>
+  <td>Außendienst Reinigung</td>
+  <td>Außendienst Reinigung</td>
+</tr>
+<tr>
+  <td>Marko Petrovic</td>
+  <td><code>aussendienst-bewachung.bdd@wolfinne.test</code></td>
+  <td><code>BddTest1234!</code></td>
+  <td>Außendienst Bewachung</td>
+  <td>Außendienst Bewachung</td>
+</tr>
+<tr>
+  <td>Michael Wieser</td>
+  <td><code>sonderreinigung.bdd@wolfinne.test</code></td>
+  <td><code>BddTest1234!</code></td>
+  <td>Sonderreinigung (SR)</td>
+  <td>Sonderreinigung (SR)</td>
+</tr>
+<tr>
+  <td>Sonja Berger</td>
+  <td><code>administrator.bdd@wolfinne.test</code></td>
+  <td><code>BddTest1234!</code></td>
+  <td>Administrator</td>
+  <td>Administrator</td>
+</tr>
+</tbody>
+</table>
+</body>
+</html>

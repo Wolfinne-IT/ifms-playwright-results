@@ -1,0 +1,5 @@
+{
+  "source": "ifms-playwright push to main (no rebuild)",
+  "triggerUrl": "https://github.com/Wolfinne-IT/Ifms-odoo-playwright/commit/8fd5710e5e6c63e6f1057671b8276fdce8029fd1",
+  "runUrl": "https://github.com/Wolfinne-IT/Ifms-odoo-playwright/actions/runs/29561627876"
+}
