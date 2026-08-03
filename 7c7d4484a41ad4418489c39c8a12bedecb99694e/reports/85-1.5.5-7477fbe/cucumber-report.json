@@ -1,0 +1,4225 @@
+[
+  {
+    "description": "  A Niederlassungsleitung user's Quotations list only shows quotations\n  belonging to their own Niederlassung (branch), regardless of what other\n  branches' quotations exist in the system. This is deliberately end-to-end\n  (real login, real list view) rather than a duplicate of the existing\n  ORM-level unit tests covering the same scoping rule.",
+    "elements": [
+      {
+        "description": "",
+        "id": "access-rights-—-niederlassungsleitung-sees-only-their-own-branch;niederlassungsleitung's-quotations-list-excludes-other-branches",
+        "keyword": "Scenario",
+        "line": 13,
+        "name": "Niederlassungsleitung's quotations list excludes other branches",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 110050013
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 9,
+            "name": "the standard IFMS test data exists",
+            "match": {
+              "location": "steps/seed.steps.ts:5"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 18607928287
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 10,
+            "name": "I am logged in as \"admin\" with password \"admin\"",
+            "match": {
+              "location": "steps/login.steps.ts:26"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 12023582284
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 14,
+            "name": "a test customer \"NLSCOPE Test Kunde\" with default payment terms \"30 Tage netto\" exists",
+            "match": {
+              "location": "steps/access.steps.ts:6"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 139731137
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 15,
+            "name": "a quotation named \"NLSCOPE-WIEN\" exists for customer \"NLSCOPE Test Kunde\" with branch \"Niederlassung Wien\"",
+            "match": {
+              "location": "steps/access.steps.ts:50"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 359044185
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 16,
+            "name": "a quotation named \"NLSCOPE-STMK\" exists for customer \"NLSCOPE Test Kunde\" with branch \"Niederlassung Steiermark\"",
+            "match": {
+              "location": "steps/access.steps.ts:50"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 127112375
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 17,
+            "name": "quotation \"NLSCOPE-WIEN\" has payment terms \"30 Tage netto\" taken over from the customer",
+            "match": {
+              "location": "steps/access.steps.ts:37"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 10899037
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 18,
+            "name": "I am logged in as a \"Niederlassungsleiter\"",
+            "match": {
+              "location": "steps/login.steps.ts:34"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1392211153
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 19,
+            "name": "I navigate to Quotations",
+            "match": {
+              "location": "steps/sale_order.steps.ts:85"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 265275795
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 20,
+            "name": "I remove the \"Meine Angebote\" filter",
+            "match": {
+              "location": "steps/access.steps.ts:97"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1146674064
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 21,
+            "name": "the quotations list shows \"NLSCOPE-WIEN\"",
+            "match": {
+              "location": "steps/access.steps.ts:115"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 114385624
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 22,
+            "name": "the quotations list does not show \"NLSCOPE-STMK\"",
+            "match": {
+              "location": "steps/access.steps.ts:119"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 3947253
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 40190454
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@access-nl-scope",
+            "line": 12
+          }
+        ],
+        "type": "scenario"
+      }
+    ],
+    "id": "access-rights-—-niederlassungsleitung-sees-only-their-own-branch",
+    "line": 1,
+    "keyword": "Feature",
+    "name": "Access Rights — Niederlassungsleitung sees only their own branch",
+    "tags": [],
+    "uri": "features/access/niederlassung_scope.feature"
+  },
+  {
+    "description": "  A contact person filed under a customer may keep their own postal address\n  instead of the customer's. This is deliberately end-to-end rather than a\n  duplicate of the ORM-level unit tests covering the same rules: Odoo hides\n  the address block on a Kontakt and only the \"Eigene Adresse verwenden\"\n  switch reveals it, which no Python test can observe, and the decoupling\n  has to hold through a real form save — the address synchronisation runs on\n  a write the form composes, not one a test hands it.",
+    "elements": [
+      {
+        "description": "",
+        "id": "contacts-—-a-contact-person-with-their-own-postal-address;the-address-fields-appear-in-the-contact-dialog-once-the-switch-is-on",
+        "keyword": "Scenario",
+        "line": 21,
+        "name": "The address fields appear in the contact dialog once the switch is on",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 83950988
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 15,
+            "name": "the standard IFMS test data exists",
+            "match": {
+              "location": "steps/seed.steps.ts:5"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 151803
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 16,
+            "name": "I am logged in as \"admin\" with password \"admin\"",
+            "match": {
+              "location": "steps/login.steps.ts:26"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1749314130
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 17,
+            "name": "a customer \"BDD Eigenadresse Kunde\" with the street \"Arsenalstraße 8\" in \"1030\" \"Wien\" exists",
+            "match": {
+              "location": "steps/contacts.steps.ts:31"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 106811893
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 18,
+            "name": "a contact person \"BDD Eigenadresse Kontakt\" of \"BDD Eigenadresse Kunde\" exists",
+            "match": {
+              "location": "steps/contacts.steps.ts:46"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 66934173
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 22,
+            "name": "I open the contact person \"BDD Eigenadresse Kontakt\" from the Kontakte tab of \"BDD Eigenadresse Kunde\"",
+            "match": {
+              "location": "steps/contacts.steps.ts:82"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1320682955
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 23,
+            "name": "the contact dialog shows no address fields",
+            "match": {
+              "location": "steps/contacts.steps.ts:91"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 4812004
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 24,
+            "name": "I turn the \"Eigene Adresse verwenden\" switch on in the contact dialog",
+            "match": {
+              "location": "steps/contacts.steps.ts:101"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 39077940
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 25,
+            "name": "the contact dialog shows the address fields",
+            "match": {
+              "location": "steps/contacts.steps.ts:96"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 110143110
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 29791721
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@contacts",
+            "line": 4
+          },
+          {
+            "name": "@task-171",
+            "line": 4
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "contacts-—-a-contact-person-with-their-own-postal-address;an-address-typed-on-the-contact-person-does-not-land-on-the-customer",
+        "keyword": "Scenario",
+        "line": 28,
+        "name": "An address typed on the contact person does not land on the customer",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 84405514
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 15,
+            "name": "the standard IFMS test data exists",
+            "match": {
+              "location": "steps/seed.steps.ts:5"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 123274
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 16,
+            "name": "I am logged in as \"admin\" with password \"admin\"",
+            "match": {
+              "location": "steps/login.steps.ts:26"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1710796559
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 17,
+            "name": "a customer \"BDD Eigenadresse Kunde\" with the street \"Arsenalstraße 8\" in \"1030\" \"Wien\" exists",
+            "match": {
+              "location": "steps/contacts.steps.ts:31"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 58370650
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 18,
+            "name": "a contact person \"BDD Eigenadresse Kontakt\" of \"BDD Eigenadresse Kunde\" exists",
+            "match": {
+              "location": "steps/contacts.steps.ts:46"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 48031205
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 29,
+            "name": "the contact person \"BDD Eigenadresse Kontakt\" keeps their own street \"Jakov-Lind-Straße 4\" in \"1020\" \"Wien\"",
+            "match": {
+              "location": "steps/contacts.steps.ts:68"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 44581840
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 30,
+            "name": "I change the street of contact person \"BDD Eigenadresse Kontakt\" to \"Praterstraße 12\" on their contact form",
+            "match": {
+              "location": "steps/contacts.steps.ts:109"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1200318493
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 31,
+            "name": "the contact person \"BDD Eigenadresse Kontakt\" has the street \"Praterstraße 12\"",
+            "match": {
+              "location": "steps/contacts.steps.ts:139"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 18562753
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 32,
+            "name": "the customer \"BDD Eigenadresse Kunde\" has the street \"Arsenalstraße 8\"",
+            "match": {
+              "location": "steps/contacts.steps.ts:146"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 16644814
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 28617164
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@contacts",
+            "line": 4
+          },
+          {
+            "name": "@task-171",
+            "line": 4
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "contacts-—-a-contact-person-with-their-own-postal-address;a-change-to-the-customer-address-leaves-the-contact's-own-address-alone",
+        "keyword": "Scenario",
+        "line": 35,
+        "name": "A change to the customer address leaves the contact's own address alone",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 82326363
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 15,
+            "name": "the standard IFMS test data exists",
+            "match": {
+              "location": "steps/seed.steps.ts:5"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 132103
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 16,
+            "name": "I am logged in as \"admin\" with password \"admin\"",
+            "match": {
+              "location": "steps/login.steps.ts:26"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1746102671
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 17,
+            "name": "a customer \"BDD Eigenadresse Kunde\" with the street \"Arsenalstraße 8\" in \"1030\" \"Wien\" exists",
+            "match": {
+              "location": "steps/contacts.steps.ts:31"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 63146486
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 18,
+            "name": "a contact person \"BDD Eigenadresse Kontakt\" of \"BDD Eigenadresse Kunde\" exists",
+            "match": {
+              "location": "steps/contacts.steps.ts:46"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 62993543
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 36,
+            "name": "the contact person \"BDD Eigenadresse Kontakt\" keeps their own street \"Jakov-Lind-Straße 4\" in \"1020\" \"Wien\"",
+            "match": {
+              "location": "steps/contacts.steps.ts:68"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 50644234
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 37,
+            "name": "I change the street of customer \"BDD Eigenadresse Kunde\" to \"Neue Firmenstraße 1\" on their contact form",
+            "match": {
+              "location": "steps/contacts.steps.ts:119"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1383950381
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 38,
+            "name": "the contact person \"BDD Eigenadresse Kontakt\" has the street \"Jakov-Lind-Straße 4\"",
+            "match": {
+              "location": "steps/contacts.steps.ts:139"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 12911546
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 39,
+            "name": "the customer \"BDD Eigenadresse Kunde\" has the street \"Neue Firmenstraße 1\"",
+            "match": {
+              "location": "steps/contacts.steps.ts:146"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 11777156
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 25150397
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@contacts",
+            "line": 4
+          },
+          {
+            "name": "@task-171",
+            "line": 4
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "contacts-—-a-contact-person-with-their-own-postal-address;a-contact-person-without-the-switch-still-follows-the-customer-address",
+        "keyword": "Scenario",
+        "line": 42,
+        "name": "A contact person without the switch still follows the customer address",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 82122778
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 15,
+            "name": "the standard IFMS test data exists",
+            "match": {
+              "location": "steps/seed.steps.ts:5"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 113993
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 16,
+            "name": "I am logged in as \"admin\" with password \"admin\"",
+            "match": {
+              "location": "steps/login.steps.ts:26"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1767856403
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 17,
+            "name": "a customer \"BDD Eigenadresse Kunde\" with the street \"Arsenalstraße 8\" in \"1030\" \"Wien\" exists",
+            "match": {
+              "location": "steps/contacts.steps.ts:31"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 67289960
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 18,
+            "name": "a contact person \"BDD Eigenadresse Kontakt\" of \"BDD Eigenadresse Kunde\" exists",
+            "match": {
+              "location": "steps/contacts.steps.ts:46"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 58917251
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 43,
+            "name": "I change the street of customer \"BDD Eigenadresse Kunde\" to \"Neue Firmenstraße 1\" on their contact form",
+            "match": {
+              "location": "steps/contacts.steps.ts:119"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1297741720
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 44,
+            "name": "the contact person \"BDD Eigenadresse Kontakt\" has the street \"Neue Firmenstraße 1\"",
+            "match": {
+              "location": "steps/contacts.steps.ts:139"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 19211033
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 30303400
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@contacts",
+            "line": 4
+          },
+          {
+            "name": "@task-171",
+            "line": 4
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "contacts-—-a-contact-person-with-their-own-postal-address;turning-the-switch-off-hands-the-contact-back-to-the-customer-address",
+        "keyword": "Scenario",
+        "line": 47,
+        "name": "Turning the switch off hands the contact back to the customer address",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 81534518
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 15,
+            "name": "the standard IFMS test data exists",
+            "match": {
+              "location": "steps/seed.steps.ts:5"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 117365
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 16,
+            "name": "I am logged in as \"admin\" with password \"admin\"",
+            "match": {
+              "location": "steps/login.steps.ts:26"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1837857420
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 17,
+            "name": "a customer \"BDD Eigenadresse Kunde\" with the street \"Arsenalstraße 8\" in \"1030\" \"Wien\" exists",
+            "match": {
+              "location": "steps/contacts.steps.ts:31"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 424845026
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 18,
+            "name": "a contact person \"BDD Eigenadresse Kontakt\" of \"BDD Eigenadresse Kunde\" exists",
+            "match": {
+              "location": "steps/contacts.steps.ts:46"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 90728252
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 48,
+            "name": "the contact person \"BDD Eigenadresse Kontakt\" keeps their own street \"Jakov-Lind-Straße 4\" in \"1020\" \"Wien\"",
+            "match": {
+              "location": "steps/contacts.steps.ts:68"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 65798018
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 49,
+            "name": "I turn the \"Eigene Adresse verwenden\" switch off on the contact form of \"BDD Eigenadresse Kontakt\"",
+            "match": {
+              "location": "steps/contacts.steps.ts:129"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1737716126
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 50,
+            "name": "the contact person \"BDD Eigenadresse Kontakt\" has the street \"Arsenalstraße 8\"",
+            "match": {
+              "location": "steps/contacts.steps.ts:139"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 12981620
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 31978974
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@contacts",
+            "line": 4
+          },
+          {
+            "name": "@task-171",
+            "line": 4
+          }
+        ],
+        "type": "scenario"
+      }
+    ],
+    "id": "contacts-—-a-contact-person-with-their-own-postal-address",
+    "line": 5,
+    "keyword": "Feature",
+    "name": "Contacts — a contact person with their own postal address",
+    "tags": [
+      {
+        "name": "@contacts",
+        "line": 4
+      },
+      {
+        "name": "@task-171",
+        "line": 4
+      }
+    ],
+    "uri": "features/contacts/contact_own_address.feature"
+  },
+  {
+    "description": "  Verify that a valid user can log in and the UI is displayed in German.",
+    "elements": [
+      {
+        "description": "",
+        "id": "login;successful-login-redirects-to-the-home-dashboard",
+        "keyword": "Scenario",
+        "line": 9,
+        "name": "Successful login redirects to the home dashboard",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 86998884
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 6,
+            "name": "the standard IFMS test data exists",
+            "match": {
+              "location": "steps/seed.steps.ts:5"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 125154
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 10,
+            "name": "I open the Odoo login page",
+            "match": {
+              "location": "steps/login.steps.ts:7"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 177084965
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 11,
+            "name": "I log in as a \"Bereichsleiter\"",
+            "match": {
+              "location": "steps/login.steps.ts:20"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1846826305
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 12,
+            "name": "I am on the home dashboard",
+            "match": {
+              "location": "steps/login.steps.ts:40"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 22587218
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 13,
+            "name": "the interface is in German",
+            "match": {
+              "location": "steps/login.steps.ts:45"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 5211482
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 25105473
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@regression",
+            "line": 1
+          },
+          {
+            "name": "@login",
+            "line": 1
+          },
+          {
+            "name": "@smoke",
+            "line": 8
+          }
+        ],
+        "type": "scenario"
+      }
+    ],
+    "id": "login",
+    "line": 2,
+    "keyword": "Feature",
+    "name": "Login",
+    "tags": [
+      {
+        "name": "@regression",
+        "line": 1
+      },
+      {
+        "name": "@login",
+        "line": 1
+      }
+    ],
+    "uri": "features/login/login.feature"
+  },
+  {
+    "description": "  \"Kollidierende Schichten ansehen\" in the conflict warning must open the\n  conflict view, not crash the client with an Odoo Client Error (OwlError).",
+    "elements": [
+      {
+        "description": "",
+        "id": "planning-gantt-—-conflicting-shifts-view-(task-#121-regression);viewing-colliding-shifts-from-the-conflict-warning-does-not-crash-the-client",
+        "keyword": "Scenario",
+        "line": 10,
+        "name": "Viewing colliding shifts from the conflict warning does not crash the client",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 87139628
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 6,
+            "name": "the standard IFMS test data exists",
+            "match": {
+              "location": "steps/seed.steps.ts:5"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 120879
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 7,
+            "name": "I am logged in as \"admin\" with password \"admin\"",
+            "match": {
+              "location": "steps/login.steps.ts:26"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1787124517
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 11,
+            "name": "two overlapping shifts exist for \"Szandra Ugljesic\"",
+            "match": {
+              "location": "steps/planning.steps.ts:359"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 141826823
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 12,
+            "name": "I navigate to the Planning Gantt",
+            "match": {
+              "location": "steps/planning.steps.ts:383"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1672292230
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 13,
+            "name": "I edit the first shift for \"Szandra Ugljesic\"",
+            "match": {
+              "location": "steps/planning.steps.ts:388"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 668182502
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 14,
+            "name": "I click \"Kollidierende Schichten ansehen\"",
+            "match": {
+              "location": "steps/planning.steps.ts:393"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1533741231
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 15,
+            "name": "no Odoo client error is shown",
+            "match": {
+              "location": "steps/planning.steps.ts:398"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 9405292
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 16,
+            "name": "the \"Kollidierende Schichten\" filter is applied",
+            "match": {
+              "location": "steps/planning.steps.ts:403"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 3305504
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 28062957
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@task-121",
+            "line": 9
+          }
+        ],
+        "type": "scenario"
+      }
+    ],
+    "id": "planning-gantt-—-conflicting-shifts-view-(task-#121-regression)",
+    "line": 1,
+    "keyword": "Feature",
+    "name": "Planning Gantt — conflicting shifts view (Task #121 regression)",
+    "tags": [],
+    "uri": "features/planning/conflict_view.feature"
+  },
+  {
+    "description": "  Show the contracted hours (Zugewiesene Zeit / Kontrollstunden) next to the\n  planned hours on each project row in the Planning Gantt, so planners can\n  see at a glance whether an Objekt is under- or over-staffed against its\n  contract, without breaking the existing Gantt visuals.\n  Requires: fixture property \"Testobjekt Kontrollstunden BDD\" linked to customer \"IFMS GmbH\".",
+    "elements": [
+      {
+        "description": "",
+        "id": "planning-gantt-—-contracted-vs.-planned-hours-indicator-(kontrollstunden);contracted-vs-planned-indicator-appears-on-project-rows-without-disturbing-existing-row-controls",
+        "keyword": "Scenario",
+        "line": 16,
+        "name": "Contracted-vs-planned indicator appears on project rows without disturbing existing row controls",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 88416504
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 9,
+            "name": "the standard IFMS test data exists",
+            "match": {
+              "location": "steps/seed.steps.ts:5"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 132248
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 10,
+            "name": "I am logged in as \"admin\" with password \"admin\"",
+            "match": {
+              "location": "steps/login.steps.ts:26"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1751467810
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 11,
+            "name": "a property \"Testobjekt Kontrollstunden BDD\" exists for customer \"IFMS GmbH\"",
+            "match": {
+              "location": "steps/sale_order.steps.ts:7"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 256721651
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 12,
+            "name": "a project \"Objekt Kontrollstunden BDD\" exists for customer \"IFMS GmbH\" and property \"Testobjekt Kontrollstunden BDD\" managed by \"Bereichsleiter\" with Monday control hours of 8 hours",
+            "match": {
+              "location": "steps/planning.steps.ts:21"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 429194149
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 13,
+            "name": "I am logged in as a \"Bereichsleiter\"",
+            "match": {
+              "location": "steps/login.steps.ts:34"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1246075920
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 17,
+            "name": "I navigate to the Planning Gantt grouped by project",
+            "match": {
+              "location": "steps/planning.steps.ts:125"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1207034088
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 18,
+            "name": "I switch the Gantt to week scale",
+            "match": {
+              "location": "steps/planning.steps.ts:144"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1635205223
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 19,
+            "name": "the project row for \"Objekt Kontrollstunden BDD\" shows a contracted-hours indicator",
+            "match": {
+              "location": "steps/planning.steps.ts:154"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 4472670
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 20,
+            "name": "the add-open-shifts button is still visible on the project row for \"Objekt Kontrollstunden BDD\"",
+            "match": {
+              "location": "steps/planning.steps.ts:190"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 2740986
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 34110276
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@task-188",
+            "line": 15
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "planning-gantt-—-contracted-vs.-planned-hours-indicator-(kontrollstunden);weekend-and-holiday-column-tinting-is-unaffected-by-the-new-indicator",
+        "keyword": "Scenario",
+        "line": 23,
+        "name": "Weekend and holiday column tinting is unaffected by the new indicator",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 88054990
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 9,
+            "name": "the standard IFMS test data exists",
+            "match": {
+              "location": "steps/seed.steps.ts:5"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 130884
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 10,
+            "name": "I am logged in as \"admin\" with password \"admin\"",
+            "match": {
+              "location": "steps/login.steps.ts:26"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1791337046
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 11,
+            "name": "a property \"Testobjekt Kontrollstunden BDD\" exists for customer \"IFMS GmbH\"",
+            "match": {
+              "location": "steps/sale_order.steps.ts:7"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 78727444
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 12,
+            "name": "a project \"Objekt Kontrollstunden BDD\" exists for customer \"IFMS GmbH\" and property \"Testobjekt Kontrollstunden BDD\" managed by \"Bereichsleiter\" with Monday control hours of 8 hours",
+            "match": {
+              "location": "steps/planning.steps.ts:21"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 174121017
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 13,
+            "name": "I am logged in as a \"Bereichsleiter\"",
+            "match": {
+              "location": "steps/login.steps.ts:34"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1223792432
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 24,
+            "name": "I navigate to the Planning Gantt grouped by project",
+            "match": {
+              "location": "steps/planning.steps.ts:125"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1234086905
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 25,
+            "name": "I switch the Gantt to month scale",
+            "match": {
+              "location": "steps/planning.steps.ts:149"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1635272239
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 26,
+            "name": "weekend or holiday columns are still tinted in the Gantt",
+            "match": {
+              "location": "steps/planning.steps.ts:195"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 4110195
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 36935914
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@task-188",
+            "line": 22
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "planning-gantt-—-contracted-vs.-planned-hours-indicator-(kontrollstunden);editing-a-project's-control-hours-updates-the-gantt-indicator-on-reload",
+        "keyword": "Scenario",
+        "line": 29,
+        "name": "Editing a project's control hours updates the Gantt indicator on reload",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 86769711
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 9,
+            "name": "the standard IFMS test data exists",
+            "match": {
+              "location": "steps/seed.steps.ts:5"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 125757
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 10,
+            "name": "I am logged in as \"admin\" with password \"admin\"",
+            "match": {
+              "location": "steps/login.steps.ts:26"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1816404925
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 11,
+            "name": "a property \"Testobjekt Kontrollstunden BDD\" exists for customer \"IFMS GmbH\"",
+            "match": {
+              "location": "steps/sale_order.steps.ts:7"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 73758058
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 12,
+            "name": "a project \"Objekt Kontrollstunden BDD\" exists for customer \"IFMS GmbH\" and property \"Testobjekt Kontrollstunden BDD\" managed by \"Bereichsleiter\" with Monday control hours of 8 hours",
+            "match": {
+              "location": "steps/planning.steps.ts:21"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 156639162
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 13,
+            "name": "I am logged in as a \"Bereichsleiter\"",
+            "match": {
+              "location": "steps/login.steps.ts:34"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1260253004
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 30,
+            "name": "I navigate to the Planning Gantt grouped by project",
+            "match": {
+              "location": "steps/planning.steps.ts:125"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1141537180
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 31,
+            "name": "I switch the Gantt to month scale",
+            "match": {
+              "location": "steps/planning.steps.ts:149"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1639228978
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 32,
+            "name": "the project row for \"Objekt Kontrollstunden BDD\" shows a contracted-hours indicator for Monday hours of 8",
+            "match": {
+              "location": "steps/planning.steps.ts:178"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 7545617
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 33,
+            "name": "the Monday control hours for project \"Objekt Kontrollstunden BDD\" are changed to 16 hours",
+            "match": {
+              "location": "steps/planning.steps.ts:102"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 63140383
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 34,
+            "name": "I reload the Planning Gantt",
+            "match": {
+              "location": "steps/planning.steps.ts:137"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1027972412
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 35,
+            "name": "I switch the Gantt to month scale",
+            "match": {
+              "location": "steps/planning.steps.ts:149"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1631635479
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 36,
+            "name": "the project row for \"Objekt Kontrollstunden BDD\" shows a contracted-hours indicator for Monday hours of 16",
+            "match": {
+              "location": "steps/planning.steps.ts:178"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 5687170
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 32409051
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@task-188",
+            "line": 28
+          }
+        ],
+        "type": "scenario"
+      }
+    ],
+    "id": "planning-gantt-—-contracted-vs.-planned-hours-indicator-(kontrollstunden)",
+    "line": 1,
+    "keyword": "Feature",
+    "name": "Planning Gantt — contracted vs. planned hours indicator (Kontrollstunden)",
+    "tags": [],
+    "uri": "features/planning/gantt_control_hours_indicator.feature"
+  },
+  {
+    "description": "  \"My Team\" must expand to every employee in the management hierarchy, not\n  just direct reports — previously only direct reports were selectable/visible.\n  Requires: fixture employees \"Peter Huber\" (reports to Bereichsleiter) and\n  \"Anna Mayer\" (reports to Peter Huber) from \"the standard IFMS test data exists\".",
+    "elements": [
+      {
+        "description": "",
+        "id": "planning-gantt-—-initiate-my-team-includes-indirect-subordinates-(task-#113);initiate-my-team-surfaces-an-indirect-(multi-level)-subordinate",
+        "keyword": "Scenario",
+        "line": 13,
+        "name": "Initiate My Team surfaces an indirect (multi-level) subordinate",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 84319753
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 8,
+            "name": "the standard IFMS test data exists",
+            "match": {
+              "location": "steps/seed.steps.ts:5"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 111164
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 9,
+            "name": "I am logged in as \"admin\" with password \"admin\"",
+            "match": {
+              "location": "steps/login.steps.ts:26"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1736417042
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 10,
+            "name": "I am logged in as a \"Bereichsleiter\"",
+            "match": {
+              "location": "steps/login.steps.ts:34"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1208089371
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 14,
+            "name": "I navigate to the Planning Gantt",
+            "match": {
+              "location": "steps/planning.steps.ts:383"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 627859228
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 15,
+            "name": "the row for \"Anna Mayer\" is not visible",
+            "match": {
+              "location": "steps/planning.steps.ts:419"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 10659146
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 16,
+            "name": "I toggle \"Mein Team initiieren\" in the Gantt Actions menu",
+            "match": {
+              "location": "steps/planning.steps.ts:409"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 120779596
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 17,
+            "name": "the row for \"Anna Mayer\" is visible",
+            "match": {
+              "location": "steps/planning.steps.ts:414"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 362123587
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 34037262
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@task-113",
+            "line": 12
+          }
+        ],
+        "type": "scenario"
+      }
+    ],
+    "id": "planning-gantt-—-initiate-my-team-includes-indirect-subordinates-(task-#113)",
+    "line": 1,
+    "keyword": "Feature",
+    "name": "Planning Gantt — Initiate My Team includes indirect subordinates (Task #113)",
+    "tags": [],
+    "uri": "features/planning/initiate_my_team.feature"
+  },
+  {
+    "description": "",
+    "elements": [
+      {
+        "description": "",
+        "id": "planning-—-monthly-per-employee-roster-printout-(a0,-two-layouts);the-monthly-printout-wizard-opens-from-the-planning-gantt-actions-menu",
+        "keyword": "Scenario",
+        "line": 27,
+        "name": "The monthly printout wizard opens from the Planning Gantt Actions menu",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 87102397
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 20,
+            "name": "the standard IFMS test data exists",
+            "match": {
+              "location": "steps/seed.steps.ts:5"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 116823
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 21,
+            "name": "I am logged in as \"admin\" with password \"admin\"",
+            "match": {
+              "location": "steps/login.steps.ts:26"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1767624262
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 22,
+            "name": "a property \"Testobjekt Monatsplan BDD\" exists for customer \"IFMS GmbH\"",
+            "match": {
+              "location": "steps/sale_order.steps.ts:7"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 145819366
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 23,
+            "name": "a project \"Objekt Monatsplan BDD\" exists for customer \"IFMS GmbH\" and property \"Testobjekt Monatsplan BDD\" managed by \"Bereichsleiter\" with Monday control hours of 8 hours",
+            "match": {
+              "location": "steps/planning.steps.ts:21"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 243011457
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 24,
+            "name": "a shift on \"Objekt Monatsplan BDD\" is assigned to \"Szandra Ugljesic\" this week",
+            "match": {
+              "location": "steps/planning.steps.ts:226"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 49114856
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 28,
+            "name": "I navigate to the Planning Gantt grouped by project",
+            "match": {
+              "location": "steps/planning.steps.ts:125"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1329976688
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 29,
+            "name": "I switch the Gantt to month scale",
+            "match": {
+              "location": "steps/planning.steps.ts:149"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1635775282
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 30,
+            "name": "I open the monthly printout from the Gantt Actions menu",
+            "match": {
+              "location": "steps/monthly_printout.steps.ts:27"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 91782355
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 31,
+            "name": "the monthly printout wizard is shown with both layout options",
+            "match": {
+              "location": "steps/monthly_printout.steps.ts:47"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 121490427
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 29557833
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@planning",
+            "line": 16
+          },
+          {
+            "name": "@task-286",
+            "line": 16
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "planning-—-monthly-per-employee-roster-printout-(a0,-two-layouts);the-monthly-printout-wizard-opens-from-the-objekt-form",
+        "keyword": "Scenario",
+        "line": 34,
+        "name": "The monthly printout wizard opens from the Objekt form",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 81827085
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 20,
+            "name": "the standard IFMS test data exists",
+            "match": {
+              "location": "steps/seed.steps.ts:5"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 108393
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 21,
+            "name": "I am logged in as \"admin\" with password \"admin\"",
+            "match": {
+              "location": "steps/login.steps.ts:26"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1726064787
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 22,
+            "name": "a property \"Testobjekt Monatsplan BDD\" exists for customer \"IFMS GmbH\"",
+            "match": {
+              "location": "steps/sale_order.steps.ts:7"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 73167602
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 23,
+            "name": "a project \"Objekt Monatsplan BDD\" exists for customer \"IFMS GmbH\" and property \"Testobjekt Monatsplan BDD\" managed by \"Bereichsleiter\" with Monday control hours of 8 hours",
+            "match": {
+              "location": "steps/planning.steps.ts:21"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 148534364
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 24,
+            "name": "a shift on \"Objekt Monatsplan BDD\" is assigned to \"Szandra Ugljesic\" this week",
+            "match": {
+              "location": "steps/planning.steps.ts:226"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 89556815
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 35,
+            "name": "I open the monthly printout from the Objekt \"Objekt Monatsplan BDD\" form",
+            "match": {
+              "location": "steps/monthly_printout.steps.ts:34"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1381292549
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 36,
+            "name": "the monthly printout wizard is shown with both layout options",
+            "match": {
+              "location": "steps/monthly_printout.steps.ts:47"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 127961022
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 30395332
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@planning",
+            "line": 16
+          },
+          {
+            "name": "@task-286",
+            "line": 16
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "planning-—-monthly-per-employee-roster-printout-(a0,-two-layouts);the-monthly-plan-report-renders-in-the-horizontal-layout",
+        "keyword": "Scenario Outline",
+        "line": 45,
+        "name": "The monthly plan report renders in the horizontal layout",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 86304906
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 20,
+            "name": "the standard IFMS test data exists",
+            "match": {
+              "location": "steps/seed.steps.ts:5"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 114319
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 21,
+            "name": "I am logged in as \"admin\" with password \"admin\"",
+            "match": {
+              "location": "steps/login.steps.ts:26"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1760689599
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 22,
+            "name": "a property \"Testobjekt Monatsplan BDD\" exists for customer \"IFMS GmbH\"",
+            "match": {
+              "location": "steps/sale_order.steps.ts:7"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 75797088
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 23,
+            "name": "a project \"Objekt Monatsplan BDD\" exists for customer \"IFMS GmbH\" and property \"Testobjekt Monatsplan BDD\" managed by \"Bereichsleiter\" with Monday control hours of 8 hours",
+            "match": {
+              "location": "steps/planning.steps.ts:21"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 170482889
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 24,
+            "name": "a shift on \"Objekt Monatsplan BDD\" is assigned to \"Szandra Ugljesic\" this week",
+            "match": {
+              "location": "steps/planning.steps.ts:226"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 54769509
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 40,
+            "name": "a monthly printout wizard for project \"Objekt Monatsplan BDD\" with the \"horizontal\" layout exists",
+            "match": {
+              "location": "steps/monthly_printout.steps.ts:61"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 46509325
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 41,
+            "name": "the monthly plan report renders for that wizard",
+            "match": {
+              "location": "steps/monthly_printout.steps.ts:74"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 148719574
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 30053011
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@planning",
+            "line": 16
+          },
+          {
+            "name": "@task-286",
+            "line": 16
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "planning-—-monthly-per-employee-roster-printout-(a0,-two-layouts);the-monthly-plan-report-renders-in-the-vertical-layout",
+        "keyword": "Scenario Outline",
+        "line": 46,
+        "name": "The monthly plan report renders in the vertical layout",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 85056993
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 20,
+            "name": "the standard IFMS test data exists",
+            "match": {
+              "location": "steps/seed.steps.ts:5"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 130076
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 21,
+            "name": "I am logged in as \"admin\" with password \"admin\"",
+            "match": {
+              "location": "steps/login.steps.ts:26"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1845329249
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 22,
+            "name": "a property \"Testobjekt Monatsplan BDD\" exists for customer \"IFMS GmbH\"",
+            "match": {
+              "location": "steps/sale_order.steps.ts:7"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 74554103
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 23,
+            "name": "a project \"Objekt Monatsplan BDD\" exists for customer \"IFMS GmbH\" and property \"Testobjekt Monatsplan BDD\" managed by \"Bereichsleiter\" with Monday control hours of 8 hours",
+            "match": {
+              "location": "steps/planning.steps.ts:21"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 156186732
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 24,
+            "name": "a shift on \"Objekt Monatsplan BDD\" is assigned to \"Szandra Ugljesic\" this week",
+            "match": {
+              "location": "steps/planning.steps.ts:226"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 84424830
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 40,
+            "name": "a monthly printout wizard for project \"Objekt Monatsplan BDD\" with the \"vertical\" layout exists",
+            "match": {
+              "location": "steps/monthly_printout.steps.ts:61"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 19465530
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 41,
+            "name": "the monthly plan report renders for that wizard",
+            "match": {
+              "location": "steps/monthly_printout.steps.ts:74"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 53052473
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 27940034
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@planning",
+            "line": 16
+          },
+          {
+            "name": "@task-286",
+            "line": 16
+          }
+        ],
+        "type": "scenario"
+      }
+    ],
+    "id": "planning-—-monthly-per-employee-roster-printout-(a0,-two-layouts)",
+    "line": 17,
+    "keyword": "Feature",
+    "name": "Planning — monthly per-employee roster printout (A0, two layouts)",
+    "tags": [
+      {
+        "name": "@planning",
+        "line": 16
+      },
+      {
+        "name": "@task-286",
+        "line": 16
+      }
+    ],
+    "uri": "features/planning/monthly_printout.feature"
+  },
+  {
+    "description": "  Covers the \"Add Open Shifts\" bulk action, the holiday-shift display regression,\n  and the alternating row-color feature, none of which have BDD coverage today.\n  Requires: fixture property \"Testobjekt Schichten BDD\" linked to customer \"IFMS GmbH\".",
+    "elements": [
+      {
+        "description": "",
+        "id": "planning-gantt-—-bulk-open-shifts,-holiday-shift-display,-row-coloring;bulk-\"add-open-shifts\"-creates-the-requested-number-of-open-shift-chips",
+        "keyword": "Scenario",
+        "line": 14,
+        "name": "Bulk \"Add Open Shifts\" creates the requested number of open shift chips",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 85100161
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 7,
+            "name": "the standard IFMS test data exists",
+            "match": {
+              "location": "steps/seed.steps.ts:5"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 105270
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 8,
+            "name": "I am logged in as \"admin\" with password \"admin\"",
+            "match": {
+              "location": "steps/login.steps.ts:26"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1707479329
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 9,
+            "name": "a property \"Testobjekt Schichten BDD\" exists for customer \"IFMS GmbH\"",
+            "match": {
+              "location": "steps/sale_order.steps.ts:7"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 125323092
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 10,
+            "name": "a project \"Objekt Schichten BDD\" exists for customer \"IFMS GmbH\" and property \"Testobjekt Schichten BDD\" managed by \"Bereichsleiter\" with Monday control hours of 8 hours",
+            "match": {
+              "location": "steps/planning.steps.ts:21"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 244093351
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 11,
+            "name": "I am logged in as a \"Bereichsleiter\"",
+            "match": {
+              "location": "steps/login.steps.ts:34"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1203985981
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 15,
+            "name": "I navigate to the Planning Gantt grouped by project",
+            "match": {
+              "location": "steps/planning.steps.ts:125"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1219546243
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 16,
+            "name": "I switch the Gantt to week scale",
+            "match": {
+              "location": "steps/planning.steps.ts:144"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1633081873
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 17,
+            "name": "I add 2 open shifts to the project row for \"Objekt Schichten BDD\"",
+            "match": {
+              "location": "steps/planning.steps.ts:202"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 274529605
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 18,
+            "name": "the project row for \"Objekt Schichten BDD\" gains 2 more open shift chips",
+            "match": {
+              "location": "steps/planning.steps.ts:213"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 106327382
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 30858222
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@task-63",
+            "line": 13
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "planning-gantt-—-bulk-open-shifts,-holiday-shift-display,-row-coloring;shift-chips-for-different-resources-in-one-project-alternate-background-colors",
+        "keyword": "Scenario",
+        "line": 21,
+        "name": "Shift chips for different resources in one project alternate background colors",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 79259403
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 7,
+            "name": "the standard IFMS test data exists",
+            "match": {
+              "location": "steps/seed.steps.ts:5"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 101613
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 8,
+            "name": "I am logged in as \"admin\" with password \"admin\"",
+            "match": {
+              "location": "steps/login.steps.ts:26"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1650915173
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 9,
+            "name": "a property \"Testobjekt Schichten BDD\" exists for customer \"IFMS GmbH\"",
+            "match": {
+              "location": "steps/sale_order.steps.ts:7"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 71660044
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 10,
+            "name": "a project \"Objekt Schichten BDD\" exists for customer \"IFMS GmbH\" and property \"Testobjekt Schichten BDD\" managed by \"Bereichsleiter\" with Monday control hours of 8 hours",
+            "match": {
+              "location": "steps/planning.steps.ts:21"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 142708373
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 11,
+            "name": "I am logged in as a \"Bereichsleiter\"",
+            "match": {
+              "location": "steps/login.steps.ts:34"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1225609691
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 22,
+            "name": "a shift on \"Objekt Schichten BDD\" is assigned to \"Szandra Ugljesic\" this week",
+            "match": {
+              "location": "steps/planning.steps.ts:226"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 73827246
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 23,
+            "name": "a shift on \"Objekt Schichten BDD\" is assigned to \"Peter Huber\" this week",
+            "match": {
+              "location": "steps/planning.steps.ts:226"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 58997726
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 24,
+            "name": "I navigate to the Planning Gantt grouped by project and resource",
+            "match": {
+              "location": "steps/planning.steps.ts:131"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1334531412
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 25,
+            "name": "I switch the Gantt to week scale",
+            "match": {
+              "location": "steps/planning.steps.ts:144"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1665641665
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 26,
+            "name": "the shift chips for \"Szandra Ugljesic\" and \"Peter Huber\" in their resource rows under \"Objekt Schichten BDD\" have different background colors",
+            "match": {
+              "location": "steps/planning.steps.ts:249"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 32011786
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 31021011
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@task-214",
+            "line": 20
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "planning-gantt-—-bulk-open-shifts,-holiday-shift-display,-row-coloring;a-shift-on-a-public-holiday-still-shows-the-assigned-employee,-not-an-\"away\"-placeholder",
+        "keyword": "Scenario",
+        "line": 29,
+        "name": "A shift on a public holiday still shows the assigned employee, not an \"away\" placeholder",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 81135397
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 7,
+            "name": "the standard IFMS test data exists",
+            "match": {
+              "location": "steps/seed.steps.ts:5"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 120737
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 8,
+            "name": "I am logged in as \"admin\" with password \"admin\"",
+            "match": {
+              "location": "steps/login.steps.ts:26"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1692523722
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 9,
+            "name": "a property \"Testobjekt Schichten BDD\" exists for customer \"IFMS GmbH\"",
+            "match": {
+              "location": "steps/sale_order.steps.ts:7"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 76970253
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 10,
+            "name": "a project \"Objekt Schichten BDD\" exists for customer \"IFMS GmbH\" and property \"Testobjekt Schichten BDD\" managed by \"Bereichsleiter\" with Monday control hours of 8 hours",
+            "match": {
+              "location": "steps/planning.steps.ts:21"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 237592855
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 11,
+            "name": "I am logged in as a \"Bereichsleiter\"",
+            "match": {
+              "location": "steps/login.steps.ts:34"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1249638416
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 30,
+            "name": "an open shift on \"Objekt Schichten BDD\" is assigned to \"Szandra Ugljesic\" for the next upcoming Austrian public holiday",
+            "match": {
+              "location": "steps/planning.steps.ts:264"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 90689119
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 31,
+            "name": "I navigate to the Planning Gantt grouped by project",
+            "match": {
+              "location": "steps/planning.steps.ts:125"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1235743854
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 32,
+            "name": "I switch the Gantt to month scale",
+            "match": {
+              "location": "steps/planning.steps.ts:149"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1635850575
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 33,
+            "name": "I navigate the Gantt forward to the holiday's month",
+            "match": {
+              "location": "steps/planning.steps.ts:329"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 368161
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 34,
+            "name": "the shift pill for \"Szandra Ugljesic\" is visible on the holiday date",
+            "match": {
+              "location": "steps/planning.steps.ts:343"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 15072211
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 35,
+            "name": "the shift pill does not show \"abwesend\"",
+            "match": {
+              "location": "steps/planning.steps.ts:351"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 12051814
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 37010985
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@task-151",
+            "line": 28
+          }
+        ],
+        "type": "scenario"
+      }
+    ],
+    "id": "planning-gantt-—-bulk-open-shifts,-holiday-shift-display,-row-coloring",
+    "line": 1,
+    "keyword": "Feature",
+    "name": "Planning Gantt — bulk open shifts, holiday shift display, row coloring",
+    "tags": [],
+    "uri": "features/planning/open_shifts.feature"
+  },
+  {
+    "description": "  As a planner\n  I want to generate a planning schedule from a Rotationsvorlage\n  So that recurring shifts are created without manual entry",
+    "elements": [
+      {
+        "description": "",
+        "id": "shift-rotation-plan-generation;generating-a-one-cycle-weekly-rotation-creates-the-weekday-shifts",
+        "keyword": "Scenario",
+        "line": 12,
+        "name": "Generating a one-cycle weekly rotation creates the weekday shifts",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 97342621
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 9,
+            "name": "the standard IFMS test data exists",
+            "match": {
+              "location": "steps/seed.steps.ts:5"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 107999
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 10,
+            "name": "I am logged in as \"admin\" with password \"admin\"",
+            "match": {
+              "location": "steps/login.steps.ts:26"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1709698143
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 16,
+            "name": "a rotation template \"E2E Weekly Rotation\" for project \"E2E Rotation Project\" with a weekday day-shift",
+            "match": {
+              "location": "steps/shift_rotation.steps.ts:33"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 111642342
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 17,
+            "name": "I open the rotation template \"E2E Weekly Rotation\"",
+            "match": {
+              "location": "steps/shift_rotation.steps.ts:69"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 680931939
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 18,
+            "name": "the rotation template form shows shift type \"F\"",
+            "match": {
+              "location": "steps/shift_rotation.steps.ts:76"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 5740782
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 19,
+            "name": "the shift plan for \"E2E Weekly Rotation\" is generated for 1 cycle from next Monday",
+            "match": {
+              "location": "steps/shift_rotation.steps.ts:98"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 64739437
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 20,
+            "name": "the rotation \"E2E Weekly Rotation\" has 5 generated planning slots",
+            "match": {
+              "location": "steps/shift_rotation.steps.ts:114"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 40395408
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 21,
+            "name": "the Planning Gantt for project \"E2E Rotation Project\" shows generated shift pills",
+            "match": {
+              "location": "steps/shift_rotation.steps.ts:126"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 2742201635
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 28809695
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@regression",
+            "line": 2
+          },
+          {
+            "name": "@shift-rotation",
+            "line": 2
+          },
+          {
+            "name": "@task-195",
+            "line": 2
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "shift-rotation-plan-generation;generating-from-a-mid-week-start-is-rejected-as-non-monday",
+        "keyword": "Scenario",
+        "line": 23,
+        "name": "Generating from a mid-week start is rejected as non-Monday",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 85823792
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 9,
+            "name": "the standard IFMS test data exists",
+            "match": {
+              "location": "steps/seed.steps.ts:5"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 135162
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 10,
+            "name": "I am logged in as \"admin\" with password \"admin\"",
+            "match": {
+              "location": "steps/login.steps.ts:26"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1693056744
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 26,
+            "name": "a rotation template \"E2E Weekly Rotation\" for project \"E2E Rotation Project\" with a weekday day-shift",
+            "match": {
+              "location": "steps/shift_rotation.steps.ts:33"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 81074493
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 27,
+            "name": "the shift plan for \"E2E Weekly Rotation\" is generated for 1 cycle from a Wednesday",
+            "match": {
+              "location": "steps/shift_rotation.steps.ts:103"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 24172005
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 28,
+            "name": "shift plan generation is refused with a Monday-start error",
+            "match": {
+              "location": "steps/shift_rotation.steps.ts:119"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 759814
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 21836465
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@regression",
+            "line": 2
+          },
+          {
+            "name": "@shift-rotation",
+            "line": 2
+          },
+          {
+            "name": "@task-195",
+            "line": 2
+          }
+        ],
+        "type": "scenario"
+      }
+    ],
+    "id": "shift-rotation-plan-generation",
+    "line": 3,
+    "keyword": "Feature",
+    "name": "Shift rotation plan generation",
+    "tags": [
+      {
+        "name": "@regression",
+        "line": 2
+      },
+      {
+        "name": "@shift-rotation",
+        "line": 2
+      },
+      {
+        "name": "@task-195",
+        "line": 2
+      }
+    ],
+    "uri": "features/planning/shift_rotation.feature"
+  },
+  {
+    "description": "  As IFMS\n  I want the customised sale-order and invoice reports to render\n  So that a template regression is caught before it reaches a customer PDF",
+    "elements": [
+      {
+        "description": "",
+        "id": "document-generation-and-pdf-report-rendering;sale-order-document-reports-render-without-a-template-error",
+        "keyword": "Scenario Outline",
+        "line": 25,
+        "name": "Sale-order document reports render without a template error",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 83534981
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 14,
+            "name": "the standard IFMS test data exists",
+            "match": {
+              "location": "steps/seed.steps.ts:5"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1047137
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 15,
+            "name": "I am logged in as \"admin\" with password \"admin\"",
+            "match": {
+              "location": "steps/login.steps.ts:26"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1731756686
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 20,
+            "name": "a saved quotation \"E2E Doc Order\" for customer \"IFMS GmbH\" exists",
+            "match": {
+              "location": "steps/document.steps.ts:51"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 139618909
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 21,
+            "name": "the \"wolfinne_ifms_customization.report_saleorder_cover_page_standalone\" report renders for that quotation",
+            "match": {
+              "location": "steps/document.steps.ts:160"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 41380238
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 27056815
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@regression",
+            "line": 7
+          },
+          {
+            "name": "@documents",
+            "line": 7
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "document-generation-and-pdf-report-rendering;sale-order-document-reports-render-without-a-template-error",
+        "keyword": "Scenario Outline",
+        "line": 26,
+        "name": "Sale-order document reports render without a template error",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 88573375
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 14,
+            "name": "the standard IFMS test data exists",
+            "match": {
+              "location": "steps/seed.steps.ts:5"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 100164
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 15,
+            "name": "I am logged in as \"admin\" with password \"admin\"",
+            "match": {
+              "location": "steps/login.steps.ts:26"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1769301848
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 20,
+            "name": "a saved quotation \"E2E Doc Order\" for customer \"IFMS GmbH\" exists",
+            "match": {
+              "location": "steps/document.steps.ts:51"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 118739189
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 21,
+            "name": "the \"sale.report_saleorder\" report renders for that quotation",
+            "match": {
+              "location": "steps/document.steps.ts:160"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 246059301
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 28378181
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@regression",
+            "line": 7
+          },
+          {
+            "name": "@documents",
+            "line": 7
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "document-generation-and-pdf-report-rendering;the-ifms-customer-invoice-report-renders-without-a-template-error",
+        "keyword": "Scenario",
+        "line": 28,
+        "name": "The IFMS customer invoice report renders without a template error",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 83072428
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 14,
+            "name": "the standard IFMS test data exists",
+            "match": {
+              "location": "steps/seed.steps.ts:5"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 130862
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 15,
+            "name": "I am logged in as \"admin\" with password \"admin\"",
+            "match": {
+              "location": "steps/login.steps.ts:26"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1730022324
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 31,
+            "name": "a draft customer invoice \"E2E Doc Invoice\" for customer \"IFMS GmbH\" exists",
+            "match": {
+              "location": "steps/document.steps.ts:107"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 806750651
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 32,
+            "name": "the \"account.report_invoice\" report renders for that invoice",
+            "match": {
+              "location": "steps/document.steps.ts:165"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 313467636
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 30024494
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@regression",
+            "line": 7
+          },
+          {
+            "name": "@documents",
+            "line": 7
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "document-generation-and-pdf-report-rendering;a-property's-dedicated-billing-address-is-the-recipient-on-its-invoice",
+        "keyword": "Scenario",
+        "line": 34,
+        "name": "A property's dedicated billing address is the recipient on its invoice",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 84641602
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 14,
+            "name": "the standard IFMS test data exists",
+            "match": {
+              "location": "steps/seed.steps.ts:5"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 121681
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 15,
+            "name": "I am logged in as \"admin\" with password \"admin\"",
+            "match": {
+              "location": "steps/login.steps.ts:26"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1704428312
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 37,
+            "name": "a property \"E2E Billing Objekt\" for customer \"IFMS GmbH\" with a dedicated billing address exists",
+            "match": {
+              "location": "steps/document.steps.ts:170"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 127335686
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 38,
+            "name": "a draft customer invoice \"E2E Billing Invoice\" for that property exists",
+            "match": {
+              "location": "steps/document.steps.ts:217"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 202590579
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 39,
+            "name": "the \"account.report_invoice\" report shows the property billing address as the recipient of that invoice",
+            "match": {
+              "location": "steps/document.steps.ts:267"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 42811979
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 29342329
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@regression",
+            "line": 7
+          },
+          {
+            "name": "@documents",
+            "line": 7
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "document-generation-and-pdf-report-rendering;a-property's-dedicated-billing-address-is-the-recipient-on-its-quotation",
+        "keyword": "Scenario",
+        "line": 41,
+        "name": "A property's dedicated billing address is the recipient on its quotation",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 80040273
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 14,
+            "name": "the standard IFMS test data exists",
+            "match": {
+              "location": "steps/seed.steps.ts:5"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 112728
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 15,
+            "name": "I am logged in as \"admin\" with password \"admin\"",
+            "match": {
+              "location": "steps/login.steps.ts:26"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1727331414
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 43,
+            "name": "a property \"E2E Billing Objekt\" for customer \"IFMS GmbH\" with a dedicated billing address exists",
+            "match": {
+              "location": "steps/document.steps.ts:170"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 83746801
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 44,
+            "name": "a saved quotation \"E2E Billing Quotation\" for that property exists",
+            "match": {
+              "location": "steps/document.steps.ts:234"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 105705119
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 45,
+            "name": "the \"sale.report_saleorder\" report shows the property billing address as the recipient of that quotation",
+            "match": {
+              "location": "steps/document.steps.ts:272"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 41627940
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 28195779
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@regression",
+            "line": 7
+          },
+          {
+            "name": "@documents",
+            "line": 7
+          }
+        ],
+        "type": "scenario"
+      }
+    ],
+    "id": "document-generation-and-pdf-report-rendering",
+    "line": 8,
+    "keyword": "Feature",
+    "name": "Document generation and PDF report rendering",
+    "tags": [
+      {
+        "name": "@regression",
+        "line": 7
+      },
+      {
+        "name": "@documents",
+        "line": 7
+      }
+    ],
+    "uri": "features/sale_order/document_generation.feature"
+  },
+  {
+    "description": "  Core sale order scenarios for the IFMS customized quotation flow.\n  Requires: fixture property \"Testobjekt Wien\" linked to IFMS GmbH (created via \"the standard IFMS test data exists\").",
+    "elements": [
+      {
+        "description": "",
+        "id": "quotation-workflow;confirming-a-standard-quotation-numbers-it,-locks-the-category-and-becomes-an-auftrag",
+        "keyword": "Scenario",
+        "line": 13,
+        "name": "Confirming a standard quotation numbers it, locks the category and becomes an Auftrag",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 81053104
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 7,
+            "name": "the standard IFMS test data exists",
+            "match": {
+              "location": "steps/seed.steps.ts:5"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 163621
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 8,
+            "name": "I am logged in as \"admin\" with password \"admin\"",
+            "match": {
+              "location": "steps/login.steps.ts:26"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1697530524
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 9,
+            "name": "a property \"Testobjekt Wien\" exists for customer \"IFMS GmbH\"",
+            "match": {
+              "location": "steps/sale_order.steps.ts:7"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 123620675
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 10,
+            "name": "I am logged in as a \"Niederlassungsleiter\"",
+            "match": {
+              "location": "steps/login.steps.ts:34"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1237185423
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 17,
+            "name": "I fill in a standard confirmable quotation",
+            "match": {
+              "location": "steps/sale_order.steps.ts:98"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 3629266157
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 18,
+            "name": "I confirm the quotation",
+            "match": {
+              "location": "steps/sale_order.steps.ts:139"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 198677414
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 19,
+            "name": "a 6-digit offer number is assigned",
+            "match": {
+              "location": "steps/sale_order.steps.ts:144"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 4580580
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 20,
+            "name": "the category field is locked",
+            "match": {
+              "location": "steps/sale_order.steps.ts:150"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 22878170
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 21,
+            "name": "the order status is \"Verkaufsauftrag\"",
+            "match": {
+              "location": "steps/sale_order.steps.ts:155"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 113053445
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 35964498
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@regression",
+            "line": 1
+          },
+          {
+            "name": "@sale-order",
+            "line": 1
+          },
+          {
+            "name": "@smoke",
+            "line": 12
+          },
+          {
+            "name": "@task-28",
+            "line": 12
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "quotation-workflow;payment-terms-auto-fill-from-the-customer's-default-term",
+        "keyword": "Scenario",
+        "line": 24,
+        "name": "Payment terms auto-fill from the customer's default term",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 81050819
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 7,
+            "name": "the standard IFMS test data exists",
+            "match": {
+              "location": "steps/seed.steps.ts:5"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 114570
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 8,
+            "name": "I am logged in as \"admin\" with password \"admin\"",
+            "match": {
+              "location": "steps/login.steps.ts:26"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1717009120
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 9,
+            "name": "a property \"Testobjekt Wien\" exists for customer \"IFMS GmbH\"",
+            "match": {
+              "location": "steps/sale_order.steps.ts:7"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 70543085
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 10,
+            "name": "I am logged in as a \"Niederlassungsleiter\"",
+            "match": {
+              "location": "steps/login.steps.ts:34"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1221445425
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 25,
+            "name": "I navigate to Quotations",
+            "match": {
+              "location": "steps/sale_order.steps.ts:85"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 217687571
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 26,
+            "name": "I create a new quotation",
+            "match": {
+              "location": "steps/sale_order.steps.ts:90"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 731217097
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 27,
+            "name": "I set the customer to \"IFMS GmbH\"",
+            "match": {
+              "location": "steps/sale_order.steps.ts:109"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 371756734
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 28,
+            "name": "the payment terms field auto-fills from the customer's default",
+            "match": {
+              "location": "steps/sale_order.steps.ts:171"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 87139702
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 35736892
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@regression",
+            "line": 1
+          },
+          {
+            "name": "@sale-order",
+            "line": 1
+          },
+          {
+            "name": "@task-135",
+            "line": 23
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "quotation-workflow;confirming-a-quotation-without-both-signature-employees-is-blocked",
+        "keyword": "Scenario",
+        "line": 31,
+        "name": "Confirming a quotation without both signature employees is blocked",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 81824190
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 7,
+            "name": "the standard IFMS test data exists",
+            "match": {
+              "location": "steps/seed.steps.ts:5"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 137006
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 8,
+            "name": "I am logged in as \"admin\" with password \"admin\"",
+            "match": {
+              "location": "steps/login.steps.ts:26"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1724696010
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 9,
+            "name": "a property \"Testobjekt Wien\" exists for customer \"IFMS GmbH\"",
+            "match": {
+              "location": "steps/sale_order.steps.ts:7"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 74914497
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 10,
+            "name": "I am logged in as a \"Niederlassungsleiter\"",
+            "match": {
+              "location": "steps/login.steps.ts:34"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1206176113
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 32,
+            "name": "I fill in a standard confirmable quotation",
+            "match": {
+              "location": "steps/sale_order.steps.ts:98"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 3181461853
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 33,
+            "name": "I clear the second signature employee",
+            "match": {
+              "location": "steps/sale_order.steps.ts:161"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 78457009
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 34,
+            "name": "I attempt to confirm the quotation",
+            "match": {
+              "location": "steps/sale_order.steps.ts:166"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 49385966
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 35,
+            "name": "the second signature employee field is marked invalid",
+            "match": {
+              "location": "steps/sale_order.steps.ts:185"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 28270682
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 36,
+            "name": "the order status is \"Angebot\"",
+            "match": {
+              "location": "steps/sale_order.steps.ts:155"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 3266452
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 30985774
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@regression",
+            "line": 1
+          },
+          {
+            "name": "@sale-order",
+            "line": 1
+          },
+          {
+            "name": "@task-134",
+            "line": 30
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "quotation-workflow;an-\"allgemein\"-category-quotation-cannot-be-confirmed",
+        "keyword": "Scenario",
+        "line": 39,
+        "name": "An \"Allgemein\" category quotation cannot be confirmed",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 84097657
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 7,
+            "name": "the standard IFMS test data exists",
+            "match": {
+              "location": "steps/seed.steps.ts:5"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 125872
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 8,
+            "name": "I am logged in as \"admin\" with password \"admin\"",
+            "match": {
+              "location": "steps/login.steps.ts:26"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1761863672
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 9,
+            "name": "a property \"Testobjekt Wien\" exists for customer \"IFMS GmbH\"",
+            "match": {
+              "location": "steps/sale_order.steps.ts:7"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 74105345
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 10,
+            "name": "I am logged in as a \"Niederlassungsleiter\"",
+            "match": {
+              "location": "steps/login.steps.ts:34"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1239409836
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 40,
+            "name": "I navigate to Quotations",
+            "match": {
+              "location": "steps/sale_order.steps.ts:85"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 207828783
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 41,
+            "name": "I create a new quotation",
+            "match": {
+              "location": "steps/sale_order.steps.ts:90"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 723317857
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 42,
+            "name": "I set the customer to \"IFMS GmbH\"",
+            "match": {
+              "location": "steps/sale_order.steps.ts:109"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 371230791
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 43,
+            "name": "I set the property to \"Testobjekt Wien\"",
+            "match": {
+              "location": "steps/sale_order.steps.ts:114"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 344629421
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 44,
+            "name": "I set the category to \"Allgemein\"",
+            "match": {
+              "location": "steps/sale_order.steps.ts:119"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 356085856
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 45,
+            "name": "the confirm button is hidden",
+            "match": {
+              "location": "steps/sale_order.steps.ts:195"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 2893175
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 30131833
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@regression",
+            "line": 1
+          },
+          {
+            "name": "@sale-order",
+            "line": 1
+          },
+          {
+            "name": "@task-28",
+            "line": 38
+          },
+          {
+            "name": "@task-77",
+            "line": 38
+          }
+        ],
+        "type": "scenario"
+      }
+    ],
+    "id": "quotation-workflow",
+    "line": 2,
+    "keyword": "Feature",
+    "name": "Quotation workflow",
+    "tags": [
+      {
+        "name": "@regression",
+        "line": 1
+      },
+      {
+        "name": "@sale-order",
+        "line": 1
+      }
+    ],
+    "uri": "features/sale_order/quotation_workflow.feature"
+  }
+]
