@@ -1,0 +1,5 @@
+{
+  "source": "ifms-addons push to main (rebuild)",
+  "triggerUrl": "https://github.com/Wolfinne-IT/ifms-addons/commit/07cbe7f0072ce0af575fd581d111fcd65e4bb472",
+  "runUrl": "https://github.com/Wolfinne-IT/ifms-addons/actions/runs/33481451809"
+}
